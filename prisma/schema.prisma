@@ -12,3 +12,12 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model Users{
+  userId String @id
+  email String
+  name String
+  avatar String
+  lastLoginAt DateTime
+
+}
