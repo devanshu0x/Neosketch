@@ -19,5 +19,5 @@ model Users{
   name String
   avatar String
   lastLoginAt DateTime
-
+  createdAt DateTime @default(now())
 }

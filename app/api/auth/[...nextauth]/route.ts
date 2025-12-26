@@ -40,6 +40,7 @@ const handler=NextAuth({
                     avatar:googleProfile.picture,
                     email:googleProfile.email,
                     lastLoginAt:new Date(),
+                    createdAt:new Date(),
                     name:googleProfile.name
                 }
             })
