@@ -13,11 +13,39 @@ datasource db {
   provider = "postgresql"
 }
 
-model Users{
+model User{
   userId String @id
   email String
   name String
   avatar String
   lastLoginAt DateTime
   createdAt DateTime @default(now())
+  groups UserGroup[]
+  groupCreator Group[]
+}
+
+model UserGroup{
+  id String @id @default(uuid())
+  userId String 
+  groupId String
+
+  user User @relation(fields: [userId],references: [userId])
+  group Group @relation(fields: [groupId],references: [groupId])
+}
+
+model Group{
+  groupId String @id @default(uuid())
+  groupName String
+  members UserGroup[]
+  projects Project[]
+  creatorId String
+  creator User @relation(fields: [creatorId],references: [userId]) 
+
+}
+
+model Project{
+  projectId String @id @default(uuid())
+  projectName String
+  groupId String 
+  group Group @relation(fields: [groupId],references: [groupId])
 }

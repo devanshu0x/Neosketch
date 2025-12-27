@@ -13,7 +13,7 @@ export const Navbar = () => {
     const session = useSession();
 
     if(session.status==='loading' ){
-        return <nav className="z-10 flex justify-between items-center py-2 px-4 shadow-[0_1px_4px_0px_rgba(0,0,0,0.1)]">
+        return <nav className="z-10 bg-background flex justify-between items-center py-2 px-4 shadow-[0_1px_4px_0px_rgba(0,0,0,0.1)]">
             <div className="flex space-x-6 items-center">
                     <img src="logo.svg" className="h-11 sm:h-12 cursor-pointer " alt="logo" />
                     <Skeleton className="w-50 h-8 hidden sm:block"/>
@@ -24,7 +24,7 @@ export const Navbar = () => {
         </nav>
     }
    
-    return <nav className="z-10 flex justify-between items-center py-2 px-4 shadow-[0_1px_4px_0px_rgba(0,0,0,0.1)]">
+    return <nav className="z-10 bg-background flex justify-between items-center py-2 px-4 shadow-[0_1px_4px_0px_rgba(0,0,0,0.1)]">
 
         <div className="flex space-x-6 items-center">
             <img src="logo.svg" className="h-11 sm:h-12 cursor-pointer " alt="logo" />

@@ -26,7 +26,7 @@ const handler=NextAuth({
                 sub:string
             }
 
-            await prisma.users.upsert({
+            await prisma.user.upsert({
                 where:{
                     userId:googleProfile.sub
                 },
