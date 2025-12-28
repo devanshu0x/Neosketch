@@ -34,7 +34,7 @@ export async function acceptInvite(inviteId:string) {
         throw new Error("Unauthorized");
     }
 
-    const invite= await prisma.groupInvite.findUnique({
+    const invite= await prisma.groupInvite.findFirst({
         where:{
             id:inviteId
         }

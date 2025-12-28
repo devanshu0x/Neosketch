@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button"
 import { Usercard } from "./usercard"
 import { useEffect, useState } from "react";
 import { fetchGroupInfo } from "@/app/actions/group";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { InviteDialog } from "./inviteDialog";
 
 interface SidebarProps{
     selectedGroupId:string | null;
@@ -25,7 +27,7 @@ export const Sidebar= ({selectedGroupId}:SidebarProps)=>{
         async function fetchGroup(){
             if(selectedGroupId){
             const groupInfo=await fetchGroupInfo(selectedGroupId);
-            console.log(groupInfo);
+            // console.log(groupInfo);
             if(groupInfo){
                 setGroupName(groupInfo.groupName);
                 setMembers(groupInfo.members)
@@ -47,7 +49,12 @@ export const Sidebar= ({selectedGroupId}:SidebarProps)=>{
         </div>
 
         <h3 className="mt-5 text-center text-sm text-foreground">Member Management</h3>
-        <Button variant={"outline"}>Invite Member</Button>
+        <Dialog>
+            <DialogTrigger asChild>
+                <Button variant={"outline"}>Invite Member</Button>
+            </DialogTrigger>
+            {selectedGroupId && <InviteDialog groupId={selectedGroupId} />}
+        </Dialog>
         <ul className="mt-2 space-y-2 overflow-y-scroll no-scrollbar">
            {members.map((member)=>(
             <li key={member.user.userId}>

@@ -22,7 +22,7 @@ export default async function Dashboard({
 
     return<>
     <div className="fixed top-0 left-0 right-0">
-        <Navbar/>
+        <Navbar selectedGroupId={selectedGroupId} />
     </div>
      <main className="h-full max-h-dvh">
         <GroupSidebar groups={groups} selectedGroupId={selectedGroupId} />

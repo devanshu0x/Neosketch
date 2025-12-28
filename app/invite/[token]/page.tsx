@@ -10,7 +10,7 @@ interface InvitePageProps{
 }
 
 export default async function InvitePage({params}:InvitePageProps){
-    const invite= await prisma.groupInvite.findUnique({
+    const invite= await prisma.groupInvite.findFirst({
         where:{
             token:params.token
         },
