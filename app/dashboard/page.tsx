@@ -1,11 +1,25 @@
+import { fetchGroups } from "../actions/group";
 import { DesignCard } from "./_components/designCard";
 import { GroupSidebar } from "./_components/groupSidebar";
 import { Sidebar } from "./_components/sidebar";
 
+interface DashboardProps{
+    searchParams:{
+        groupId?:string;
+    };
+}
 
-export default function Dashboard(){
+export default async function Dashboard({
+    searchParams
+}:DashboardProps){
+    const groups=await fetchGroups();
+
+    const selectedGroup=groups.find(g=>g.groupId===searchParams.groupId) ?? null;
+    const selectedGroupId=selectedGroup?.groupId ?? null;
+    
+
     return <main className="h-full max-h-dvh">
-        <GroupSidebar/>
+        <GroupSidebar groups={groups} selectedGroupId={selectedGroupId} />
         <Sidebar/>
         <div className="pl-15 md:pl-75 h-full pt-17 ">
             <div className="p-4">
