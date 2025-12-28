@@ -22,6 +22,7 @@ model User{
   createdAt DateTime @default(now())
   groups UserGroup[]
   groupCreator Group[]
+  invitaions GroupInvite[]
 }
 
 model UserGroup{
@@ -40,7 +41,7 @@ model Group{
   projects Project[]
   creatorId String
   creator User @relation(fields: [creatorId],references: [userId]) 
-
+  groupInvites GroupInvite[]
 }
 
 model Project{
@@ -48,4 +49,18 @@ model Project{
   projectName String
   groupId String 
   group Group @relation(fields: [groupId],references: [groupId])
+}
+
+model GroupInvite{
+  id String @id @default(uuid())
+  email String
+  token String @unique
+  groupId String
+  inviterId String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  group Group @relation(fields: [groupId],references: [groupId])
+  inviter User @relation(fields: [inviterId], references: [userId])
+    
 }

@@ -1,26 +1,32 @@
 import { fetchGroups } from "../actions/group";
 import { DesignCard } from "./_components/designCard";
 import { GroupSidebar } from "./_components/groupSidebar";
+import { Navbar } from "./_components/navbar";
 import { Sidebar } from "./_components/sidebar";
 
 interface DashboardProps{
-    searchParams:{
+    searchParams:Promise<{
         groupId?:string;
-    };
+    }>
 }
 
 export default async function Dashboard({
     searchParams
 }:DashboardProps){
     const groups=await fetchGroups();
+    const resolvedSearchParams = await searchParams;
 
-    const selectedGroup=groups.find(g=>g.groupId===searchParams.groupId) ?? null;
+    const selectedGroup=groups.find(g=>g.groupId===resolvedSearchParams.groupId) ?? null;
     const selectedGroupId=selectedGroup?.groupId ?? null;
     
 
-    return <main className="h-full max-h-dvh">
+    return<>
+    <div className="fixed top-0 left-0 right-0">
+        <Navbar/>
+    </div>
+     <main className="h-full max-h-dvh">
         <GroupSidebar groups={groups} selectedGroupId={selectedGroupId} />
-        <Sidebar/>
+        <Sidebar selectedGroupId={selectedGroupId} />
         <div className="pl-15 md:pl-75 h-full pt-17 ">
             <div className="p-4">
                 <h4 className="text-center text-xl md:hidden font-bold ">Pokemon Master Roadmap</h4>
@@ -42,4 +48,5 @@ export default async function Dashboard({
             </div>
         </div>
     </main>
+    </>
 }
