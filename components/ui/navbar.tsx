@@ -1,19 +1,17 @@
 "use client";
 
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Button } from "../../../components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "../../../components/ui/avatar";
+import { Button } from "./button";
+import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { LogOut, Plus, UserRound } from "lucide-react";
-import { Skeleton } from "../../../components/ui/skeleton";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../../../components/ui/dropdown-menu";
+import { Skeleton } from "./skeleton";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "./dropdown-menu";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
-import { InviteDialog } from "./inviteDialog";
+import { InviteDialog } from "../../app/dashboard/_components/inviteDialog";
 
-interface NavbarProps{
-    selectedGroupId:string | null;
-}
 
-export const Navbar = ({selectedGroupId}:NavbarProps) => {
+
+export const Navbar = () => {
     const session = useSession();
 
     if(session.status==='loading' ){
@@ -37,12 +35,6 @@ export const Navbar = ({selectedGroupId}:NavbarProps) => {
         <div className="space-x-2 md:space-x-3 flex">
             {session.status === "authenticated" ?(
                 <>
-                <Dialog>
-                    <DialogTrigger asChild>
-                        <Button className="border bg-background sm:border-0" variant={"ghost"}><Plus/> <span className="hidden sm:block">Invite Members</span></Button>
-                    </DialogTrigger>
-                    {selectedGroupId && <InviteDialog groupId={selectedGroupId} />}
-                </Dialog>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Avatar>

@@ -1,7 +1,7 @@
 import { fetchGroups } from "../actions/group";
 import { DesignCard } from "./_components/designCard";
 import { GroupSidebar } from "./_components/groupSidebar";
-import { Navbar } from "./_components/navbar";
+import { Navbar } from "../../components/ui/navbar";
 import { Sidebar } from "./_components/sidebar";
 
 interface DashboardProps{
@@ -21,9 +21,6 @@ export default async function Dashboard({
     
 
     return<>
-    <div className="fixed top-0 left-0 right-0">
-        <Navbar selectedGroupId={selectedGroupId} />
-    </div>
      <main className="h-full max-h-dvh">
         <GroupSidebar groups={groups} selectedGroupId={selectedGroupId} />
         <Sidebar selectedGroupId={selectedGroupId} />
