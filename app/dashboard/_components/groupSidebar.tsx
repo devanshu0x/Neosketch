@@ -63,7 +63,6 @@ export const GroupSidebar=({groups,selectedGroupId}:GroupSidebarProps)=>{
             {groups.map((group)=>{
                 return <li key={group.groupId}>
                     <Avatar onClick={()=>{groupChange(group.groupId)}} className={`w-10 h-10 rounded-lg border-2 ${group.groupId===selectedGroupId? "border-amber-200" :"border-primary-foreground"}`}>
-                        <AvatarImage src={`https://api.dicebear.com/9.x/fun-emoji/svg?seed=${group.groupId}`}/>
                         <AvatarFallback className="rounded-none">{group.groupName.slice(0,1).toUpperCase()}</AvatarFallback>
                     </Avatar>
                 </li>

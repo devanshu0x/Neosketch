@@ -7,6 +7,7 @@ import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
 
 
+
 export async function createInvite(email:string, groupId:string){
     const session= await getServerSession(authOptions);
     if(!session?.user.id){
@@ -43,6 +44,20 @@ export async function acceptInvite(inviteId:string) {
     if(!invite){
         throw new Error("Invite not found");
     }
+
+    const user=await prisma.user.findFirst({
+        where:{
+            email:invite.email
+        },
+        include:{
+            groups:true
+        }
+    })
+
+    if(user?.groups.find((group)=>group.groupId===invite.groupId)){
+        throw new Error("You are already in that group");
+    }
+
 
     await prisma.$transaction(async (tx)=>{
         await tx.userGroup.create({

@@ -11,6 +11,10 @@ export const authOptions:NextAuthOptions={
         })
     ],
 
+    pages:{
+        signIn: "/signin"
+    },
+
     session:{
         strategy:"jwt"
     },
@@ -27,7 +31,7 @@ export const authOptions:NextAuthOptions={
 
         async session({session,token}){
             if(session.user){
-                session.user.id=token.sub as String;
+                session.user.id=token.sub as string;
             }
             return session;
         },

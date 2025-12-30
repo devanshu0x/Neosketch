@@ -33,7 +33,9 @@ export default function RootLayout({
           <div className="fixed top-0 left-0 right-0">
                   <Navbar/>
           </div>
-          {children}
+          <div className="pt-11">
+            {children}
+          </div>
         </Providers>
       </body>
     </html>
